@@ -56,6 +56,26 @@ public class MemberArchive {
     }
 
     /**
+     * Get bonus point balance of a member by member number and password.
+     * Returns -1 if member is not found or -2 if password does not validate.
+     *
+     * @param memberNumber the member to get balance from
+     * @param password password
+     * @return bonus point balance
+     *         {@code -1} if member is not found
+     *         {@code -2} if password does not validate    
+     */    
+    public int findPoints(int memberNumber, String password) {
+        if (members.containsKey(memberNumber)) {
+            if (members.get(memberNumber).checkPassword(password))
+                return members.get(memberNumber).getBonusPointsBalance();
+            else
+                return -2;
+        }
+        return -1;
+    }
+    
+    /**
      * Lists all members to the console.
      */
     public void listAllMembers() {
@@ -84,8 +104,5 @@ public class MemberArchive {
         this.members.put(member.getMemberNumber(), member);
         member = new BonusMember(5, LocalDate.now(), 75000, "FLo, Finn", "finn.flo@gmail.com");
         this.members.put(member.getMemberNumber(), member);
-
     }
-
-
 }
