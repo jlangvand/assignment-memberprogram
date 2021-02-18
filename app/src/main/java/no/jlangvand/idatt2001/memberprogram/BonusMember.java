@@ -22,11 +22,10 @@ public class BonusMember {
     public BonusMember(int memberNumber, LocalDate enrolled, int bonusPoints, String name, String email) {
         this.memberNumber = memberNumber;
         this.enrolledDate = enrolled;
-        this.bonusPointsBalance = bonusPoints;
         this.name = name;
         this.emailAddress = email;
         this.membership = new BasicMembership();
-        checkAndSetMembership();
+        registerBonusPoints(bonusPoints);
     }
 
     public int getBonusPointsBalance() {
@@ -44,6 +43,10 @@ public class BonusMember {
     public String getEmailAddress() {
         return this.emailAddress;
     }
+
+    public void setPassword(String password) {
+        this.password = new HashedPassword(password);
+    }        
 
     public boolean checkPassword(String password) {
         return this.password.validate(password);
